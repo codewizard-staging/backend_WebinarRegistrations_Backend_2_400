@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Model">
+            <EntityType HasStream="false" Name="User">
+                <Key>
+                    <PropertyRef Name="UserId"/>
+                </Key>
+                <Property Name="UserId" Type="Edm.Int64" isUnique="false"/>
+                <Property Name="Name" Type="Edm.String" isUnique="false"/>
+                <Property Name="Email" Type="Edm.String" isUnique="false"/>
+                <Property Name="PhoneNumber" Type="Edm.String" isUnique="false"/>
+                <Property Name="JobTitle" Type="Edm.String" isUnique="false"/>
+                <Property Name="Company" Type="Edm.String" isUnique="false"/>
+                <Property Name="Industry" Type="Edm.String" isUnique="false"/>
+                <Property Name="Reference" Type="Model.ReferenceOption" isUnique="false"/>
+                <Property Name="HopeToLearn" Type="Edm.String" isUnique="false"/>
+                <Property Name="Questions" Type="Edm.String" isUnique="false"/>
+                <Property Name="ConsentForFutureCommunication" Type="Edm.Boolean" isUnique="false"/>
+                <Property Name="AgreeToTermsAndCondition" Type="Edm.Boolean" isUnique="false"/>
+                <Property Name="Country" Type="Edm.String" isUnique="false"/>
+                <Property Name="TimeZone" Type="Edm.String" isUnique="false"/>
+                <Property Name="LikeToReceiveInformation" Type="Edm.Boolean" isUnique="false"/>
+                <NavigationProperty Name="PlannedWebinar" Type="Model.Webinar"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Webinar">
+                <Key>
+                    <PropertyRef Name="WebinarId"/>
+                </Key>
+                <Property Name="WebinarId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Name" Type="Edm.String" isUnique="false"/>
+                <Property Name="Description" Type="Edm.String" isUnique="false"/>
+                <Property Name="InvitationLink" Type="Edm.String" isUnique="false"/>
+                <Property Name="Topics" Type="Edm.String" isUnique="false"/>
+                <Property Name="Speaker" Type="Edm.String" isUnique="false"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="Users" EntityType="Model.User">
+                    <NavigationPropertyBinding Path="PlannedWebinar" Target="Webinars"/>
+                </EntitySet>
+                <EntitySet Name="Webinars" EntityType="Model.Webinar"/>
+            </EntityContainer>
+            <EnumType Name="ReferenceOption">
+                <Member Name="Email" Value="0"/>
+                <Member Name="SocialMedia" Value="1"/>
+                <Member Name="Website" Value="2"/>
+                <Member Name="Referral" Value="3"/>
+                <Member Name="Others" Value="4"/>
+            </EnumType>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

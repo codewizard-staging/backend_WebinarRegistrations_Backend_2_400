@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <property name="schemaName" value="webinarregistrations_backend_2"></property>
+    <property name="author=" value="db-designer"></property>
+    <changeSet id="v1-01-01" author="${author}">
+    
+ <createTable schemaName="${schemaName}" tableName="User">
+	<column name="UserId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="Name" type="VARCHAR(250)" />
+    
+     <column name="Email" type="VARCHAR(250)" />
+    
+     <column name="PhoneNumber" type="VARCHAR(250)" />
+    
+     <column name="JobTitle" type="VARCHAR(250)" />
+    
+     <column name="Company" type="VARCHAR(250)" />
+    
+     <column name="Industry" type="VARCHAR(250)" />
+    
+ 	<column name="Reference" type="INTEGER" />
+   
+     <column name="HopeToLearn" type="VARCHAR(250)" />
+    
+     <column name="Questions" type="VARCHAR(250)" />
+    
+     <column name="ConsentForFutureCommunication" type="BOOLEAN" />
+    
+     <column name="AgreeToTermsAndCondition" type="BOOLEAN" />
+    
+     <column name="Country" type="VARCHAR(250)" />
+    
+     <column name="TimeZone" type="VARCHAR(250)" />
+    
+     <column name="LikeToReceiveInformation" type="BOOLEAN" />
+    
+ 	
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Webinar">
+	<column name="WebinarId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="Name" type="VARCHAR(250)" />
+    
+     <column name="Description" type="VARCHAR(250)" />
+    
+     <column name="InvitationLink" type="VARCHAR(250)" />
+    
+     <column name="Topics" type="VARCHAR(250)" />
+    
+     <column name="Speaker" type="VARCHAR(250)" />
+    
+ 	
+</createTable>
+	
+
+	
+ 
+	<addColumn tableName="User" schemaName="${schemaName}">
+	    <column name="UserPlannedWebinar" type="INTEGER"/>
+	</addColumn>
+	<addForeignKeyConstraint baseTableName="User" baseColumnNames="UserPlannedWebinar" baseTableSchemaName="${schemaName}" constraintName="User_PlannedWebinar_fk" referencedTableName="Webinar"
+	                                 referencedColumnNames="WebinarId" referencedTableSchemaName="${schemaName}"/>
+ 
+ 	    </changeSet>
+</databaseChangeLog>
